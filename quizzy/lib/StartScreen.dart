@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizzy/Quiz.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key});
@@ -28,12 +29,23 @@ class StartScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              'Welcome to Quizzy',
-              style: TextStyle(
+            Text(
+              'Welcome to Flutter Quiz by Apoorv!',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.lato(
                   fontSize: 30,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Text(
+              'Passing Marks: 4 out of 6',
+              style: GoogleFonts.lato(
+                fontSize: 20,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -48,10 +60,10 @@ class StartScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   textStyle: const TextStyle(fontSize: 30)),
+              label: Text('Dive In!', style: GoogleFonts.lato(fontSize: 30)),
               icon: const Icon(Icons.arrow_forward),
-              label: const Text('Dive In!'),
             )
           ],
         )),

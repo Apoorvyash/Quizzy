@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzy/Resultscreen.dart';
 import 'AnsButton.dart';
 import 'package:quizzy/data/questions.dart';
 
@@ -12,6 +13,13 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  List<String> selAns = [];
+
+  void selectedAnswers(String ans) {
+    selAns.add(ans);
+  }
+
+  var i = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +42,9 @@ class _QuizState extends State<Quiz> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Question 1',
-                style: TextStyle(
+              Text(
+                'Question ${i + 1}',
+                style: const TextStyle(
                     fontSize: 30,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
@@ -48,7 +56,7 @@ class _QuizState extends State<Quiz> {
               Center(
                 widthFactor: 2,
                 child: Text(
-                  questions[0].question,
+                  questions[i].question,
                   style: const TextStyle(
                     fontSize: 17,
                     color: Colors.white,
@@ -59,28 +67,28 @@ class _QuizState extends State<Quiz> {
               const SizedBox(
                 height: 20,
               ),
-              AnsButton(
-                text: 'apoorv',
-                onTapped: () {},
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              AnsButton(
-                text: 'apoorv',
-                onTapped: () {},
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              AnsButton(text: 'Skand', onTapped: () {}),
-              const SizedBox(
-                height: 10,
-              ),
-              AnsButton(
-                text: 'apoorv',
-                onTapped: () {},
-              ),
+              ...questions[i].shuffleAnswers().map((e) {
+                return AnsButton(
+                    text: e,
+                    onTapped: () {
+                      selectedAnswers(e);
+
+                      setState(() {
+                        i++;
+                      });
+                      if (i == questions.length) {
+                        setState(() {
+                          i = 0;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ResultScreen(showAns: selAns)),
+                          );
+                        });
+                      }
+                    });
+              }).toList(),
             ],
           ),
         ),

@@ -8,14 +8,19 @@ class AnsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTapped,
-      style: ElevatedButton.styleFrom(
-          fixedSize: const Size(150, 50),
-          backgroundColor: Colors.purple,
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-          textStyle: const TextStyle(fontSize: 20)),
-      child: Text(text),
+    return Container(
+      margin: EdgeInsets.fromLTRB(40, 10, 40, 10),
+      child: ElevatedButton(
+        onPressed: onTapped,
+        style: ElevatedButton.styleFrom(
+
+            ///the button should take as much space as it can
+            minimumSize: const Size(double.infinity, 50),
+            backgroundColor: Colors.purple,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            textStyle: const TextStyle(fontSize: 20)),
+        child: Text(text, textAlign: TextAlign.center),
+      ),
     );
   }
 }
